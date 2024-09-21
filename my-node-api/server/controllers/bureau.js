@@ -4,6 +4,9 @@ const Bureau = require('../models/bureauModel'); // Import the Bureau model
 const getBureaux = async (req, res) => {
   try {
     const bureaux = await Bureau.find(); // Fetch all bureaux
+
+    console.log(JSON.stringify(bureaux));
+
     res.json(bureaux); // Send as JSON
   } catch (error) {
     console.error('Error fetching bureaux:', error);

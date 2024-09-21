@@ -6,6 +6,7 @@ const connectDB = require('./server/config/db'); // MongoDB connection setup
 const authRoutes = require('./server/routes/auth');
 const MongoStore =require('connect-mongo');
 const helmet = require('helmet');
+const path=require('path');
 
 // Load environment variables
 dotenv.config();

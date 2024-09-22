@@ -5,15 +5,14 @@ const atmSchema = new mongoose.Schema({
   number: {
     type: Number, // Use Number instead of number
     required: true
-  },
-  bureauId: {
+  }, 
+  interventions: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Bureau', // Ensure the reference matches the model name
-    required: true
-  }
+    ref: 'Intervention' // Ensure the reference matches the model name
+  }]
 });
 
 // Create the model from the schema
-const Atm = mongoose.model('Atm', atmSchema , 'atm');
+const Atm = mongoose.model('Atm', atmSchema , 'atms');
 
 module.exports = Atm

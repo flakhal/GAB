@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 
 const interventionSchema = new mongoose.Schema({
-    atmId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Atm",
-        required: true,
-      },
+  atmId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Atm',
+    required: true,
+  },
   type: {
     type: String,
     required: true,
   },
   price: {
-    type:Number,
+    type:String,
     required:true,
      unique : false
   },

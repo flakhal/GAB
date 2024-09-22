@@ -1,15 +1,18 @@
 const Intervention = require('../models/interventionModel');
 
 // Fetch all interventions
+// Fetch interventions for a specific ATM
 const getInterventions = async (req, res) => {
+  const { atmId } = req.params; // Get ATM ID from request parameters
   try {
-    const interventions = await Intervention.find().populate('bureauId'); // Fetch all interventions and populate bureauId
-    res.json(interventions); // Send as JSON
+    const interventions = await Intervention.find({ atmId }); // Filter by atmId
+    res.json(interventions);
   } catch (error) {
     console.error('Error fetching interventions:', error);
     res.status(500).json({ message: 'Error fetching interventions' });
   }
 };
+
 
 // Add a new intervention
 const addIntervention = async (req, res) => {

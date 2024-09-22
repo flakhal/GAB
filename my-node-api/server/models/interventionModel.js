@@ -35,6 +35,6 @@ const interventionSchema = new mongoose.Schema({
 });
 
 
-const Intervention = mongoose.model('intervention', interventionSchema);
+const Intervention = mongoose.model('Intervention', interventionSchema,'intervention');
 
 module.exports = Intervention;

@@ -7,6 +7,6 @@ const bureauSchema = new mongoose.Schema({
   }
 });
 
-const Bureau = mongoose.model('bureau', bureauSchema);
+const Bureau = mongoose.model('Bureau', bureauSchema ,'bureaux');
 
 module.exports = Bureau;

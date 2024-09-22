@@ -3,7 +3,7 @@ const ATM = require('../models/atmModel'); // Import the ATM model
 // Fetch all ATMs
 const getAtms = async (req, res) => {
   try {
-    const atms = await ATM.find(); // Fetch all ATMs
+    const atms = await ATM.find().populate('bureauId'); // Fetch all ATMs
     res.json(atms); // Send as JSON
   } catch (error) {
     console.error('Error fetching ATMs:', error);

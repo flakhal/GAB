@@ -14,6 +14,6 @@ const atmSchema = new mongoose.Schema({
 });
 
 // Create the model from the schema
-const Atm = mongoose.model('Atm', atmSchema);
+const Atm = mongoose.model('Atm', atmSchema , 'atm');
 
 module.exports = Atm

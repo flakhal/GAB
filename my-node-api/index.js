@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser =require("body-parser");
 const dotenv = require('dotenv');
-const connectDB = require('./server/config/db'); // MongoDB connection setup
+// const connectDB = require('./server/config/db'); // MongoDB connection setup
 const authRoutes = require('./server/routes/auth');
 const MongoStore =require('connect-mongo');
 const helmet = require('helmet');
@@ -12,7 +12,11 @@ const path=require('path');
 dotenv.config();
 
 // Connect to MongoDB
-connectDB();
+// connectDB();
+
+// Import the database connection
+require('./server/config/db'); // Adjust the path as necessary
+
 
 // Initialize express app
 const app = express();
@@ -21,7 +25,7 @@ const app = express();
 
 /** */
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "http://localhost:3001",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };

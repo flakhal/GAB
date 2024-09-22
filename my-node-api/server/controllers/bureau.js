@@ -3,10 +3,14 @@ const Bureau = require('../models/bureauModel'); // Import the Bureau model
 // Fetch all bureaux
 const getBureaux = async (req, res) => {
   try {
-    const bureaux = await Bureau.find(); // Fetch all bureaux
+    const bureaux = await Bureau.find();
 
-    console.log(JSON.stringify(bureaux));
+    if (!bureaux || bureaux.length === 0) {
+      console.log('No bureaux found');
+      return res.json([]); // Return an empty array
+    }
 
+    console.log('Bureaux data:', bureaux);
     res.json(bureaux); // Send as JSON
   } catch (error) {
     console.error('Error fetching bureaux:', error);
@@ -14,15 +18,15 @@ const getBureaux = async (req, res) => {
   }
 };
 
+
 // Add a new Bureau
 const addBureau = async (req, res) => {
   try {
-    const { address, name } = req.body; // Adjust based on your actual fields
+    const { adress} = req.body; // Adjust based on your actual fields
 
     // Create a new Bureau
     const newBureau = new Bureau({
-      address,
-      name
+      adress
     });
 
     // Save the new Bureau to the database

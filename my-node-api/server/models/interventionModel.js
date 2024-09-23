@@ -9,19 +9,24 @@ const interventionSchema = new mongoose.Schema({
   type: {
     type: String,
     required: true,
+  },date:{
+    type:Date,
+    required:true,
+
+
   },
   price: {
     type:String,
-    required:true,
+  
      unique : false
   },
   reprateur: {
     type: String,
-    required: true,
+   
   },
   isResolved: {
     type: String,
-    required: true,
+   
   },
   files: {
     type: [ 
@@ -35,6 +40,6 @@ const interventionSchema = new mongoose.Schema({
 });
 
 
-const Intervention = mongoose.model('Intervention', interventionSchema,'intervention');
+const Intervention = mongoose.model('Intervention', interventionSchema,'interventions');
 
 module.exports = Intervention;

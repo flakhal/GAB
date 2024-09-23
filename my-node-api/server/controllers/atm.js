@@ -1,4 +1,5 @@
 const ATM = require('../models/atmModel'); // Import the ATM model
+const Bureau = require('../models/bureauModel'); 
 
 // Fetch all ATMs
 const getAtms = async (req, res) => {
@@ -14,16 +15,26 @@ const getAtms = async (req, res) => {
 // Add a new ATM
 const addAtm = async (req, res) => {
   try {
-    const { date, type } = req.body; // Adjust based on your actual fields
+    const { number, bureauId } = req.body;  // Include bureauId in request
+
+    // Validate that the bureau exists
+    const bureau = await Bureau.findById(bureauId);
+    if (!bureau) {
+      return res.status(404).json({ success: false, message: 'Bureau not found' });
+    }
 
     // Create a new ATM
     const newATM = new ATM({
-      date,
-      type
+      number,
+      bureauId
     });
 
     // Save the new ATM to the database
     await newATM.save();
+
+    // Add the new ATM to the bureau's atms array
+    bureau.atms.push(newATM._id);
+    await bureau.save();
 
     res.status(201).json({
       success: true,

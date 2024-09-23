@@ -3,7 +3,7 @@ const Bureau = require('../models/bureauModel'); // Import the Bureau model
 // Fetch all bureaux
 const getBureaux = async (req, res) => {
   try {
-    const bureaux = await Bureau.find();
+    const bureaux = await Bureau.find().populate('atms');
 
     if (!bureaux || bureaux.length === 0) {
       console.log('No bureaux found');

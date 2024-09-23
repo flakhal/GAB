@@ -14,7 +14,8 @@ router.get('/atms/:atmId/interventions', getInterventions);
 // Route to add a new intervention
 router.post('/interventions', addIntervention);
 
-router.get("/intervention/:interventionId/:fileId", getFileById);
+
+router.get("/interventions/:interventionId/files/:fileId", getFileById);
 
 const uploadsDir = path.join(__dirname, "../uploads");
 if (!fs.existsSync(uploadsDir)) {

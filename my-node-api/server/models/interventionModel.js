@@ -31,6 +31,7 @@ const interventionSchema = new mongoose.Schema({
   files: {
     type: [ 
       {
+       
         fileName: String,
         fileOriginalName: String,
       },

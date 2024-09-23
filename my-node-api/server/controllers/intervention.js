@@ -1,6 +1,8 @@
 const Intervention = require('../models/interventionModel');
 const Atm = require('../models/atmModel');
-
+const path = require('path');
+const uploadsDir = path.join(__dirname, '../uploads');
+const fs = require('fs');
 // Fetch all interventions
 // Fetch interventions for a specific ATM
 const getInterventions = async (req, res) => {
@@ -54,7 +56,10 @@ const addIntervention = async (req, res) => {
 const updateIntervention = async (req, res) => {
   const { id } = req.params; // ID of the intervention to update
   const { type, price, reparateur, isResolved } = req.body; // Fields you want to update
-
+  const files = req.files.map(file => ({
+    fileName: file.filename,
+    fileOriginalName: file.originalname,
+  }));
   try {
     // Find the intervention by ID and update it with new values
     const updatedIntervention = await Intervention.findByIdAndUpdate(
@@ -64,10 +69,7 @@ const updateIntervention = async (req, res) => {
         price,
         reparateur,
         isResolved,
-        files: req.files.map(file => ({
-          fileName: file.filename, // Use the filename as fileId
-          fileOriginalName: file.originalname,
-        })), // Corrected the arrow function syntax here
+        $push: { files: { $each: files } } // Corrected the arrow function syntax here
       }, // Fields to update
       { new: true, runValidators: true } // Return the updated document and run schema validators
     );
@@ -103,11 +105,11 @@ async function getFileById(req, res) {
     // Retrieve the request document from the database
     const intervention = await Intervention.findById(interventionId);
     if (!intervention) {
-      return res.status(404).send("intervention not found");
+      return res.status(404).send("Request not found");
     }
 
     // Access files directly from the request object
-    const foundFile = request.files.find(
+    const foundFile = intervention.files.find(
       (file) => file._id.toString() === fileId
     );
     if (!foundFile) {
@@ -120,6 +122,8 @@ async function getFileById(req, res) {
     res.status(500).send("Internal Server Error");
   }
 }
+
+
 
 
 
